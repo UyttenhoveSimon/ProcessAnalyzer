@@ -25,7 +25,7 @@ namespace ProcessAnalyzerConsole
                 command = Console.ReadLine();
                 try
                 {
-                    ProcessToAnalyze pTA = AnalyzeInput(command);
+                    ProcessToAnalyze pTA = ProcessToAnalyze.AnalyzeInput(command);
                 }
                 catch (Exception ex)
                 {
@@ -36,34 +36,6 @@ namespace ProcessAnalyzerConsole
 
         }
 
-        private static ProcessToAnalyze AnalyzeInput(string command)
-        {
-            ProcessToAnalyze processToAnalyze = new ProcessToAnalyze();
-            Regex reg = new Regex(@"");
-            var matches = reg.Match(command);
-
-            if (matches.Groups[0].Success)
-            {
-
-            }
-
-            else if (matches.Groups[1].Success)
-            {
-
-            }
-
-            else if (matches.Groups[2].Success)
-            {
-
-            }
-
-            else
-            {
-                Console.WriteLine("Problem with the input, should be ProcessName DurationInSeconds SamplingInMilliSeconds ");
-                return null;
-            }
-
-            return processToAnalyze;
-        }
+        
     }
 }

@@ -4,8 +4,7 @@ using System.Text;
 using Xunit;
 
 namespace ProcessAnalyzerConsole.Tests
-{
-    
+{   
     public class Test_AnalyzeInput
     {
         [Fact]
