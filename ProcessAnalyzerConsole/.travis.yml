@@ -3,5 +3,4 @@ solution: ProcessAnalyzerConsole.sln
 
 dotnet: 2.1.502
 script:
-  - msbuild /p:Configuration=Release ProcessAnalyzerConsole.sln
   - dotnet ./packages/xunit.runners.*/tools/xunit.console.clr4.exe ./ProcessAnalyzerConsole/Tests/bin/Debug/ProcessAnalyzerConsole.dll
