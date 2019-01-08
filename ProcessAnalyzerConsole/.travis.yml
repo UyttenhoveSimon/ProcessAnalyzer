@@ -1,7 +1,0 @@
-﻿language: csharp
-solution: "ProcessAnalyzerConsole.sln"
-
-dotnet: 2.1.502
-script:
-- dotnet ProcessAnalyzerConsole.sln
-- xbuild ./packages/xunit.runners.*/tools/xunit.console.clr4.exe ./ProcessAnalyzerConsole/bin/Debug/ProcessAnalyzerConsole.dll
