@@ -1,47 +1,86 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Diagnostics;
 using System.Text.RegularExpressions;
+using System.Timers;
 
 namespace ProcessAnalyzerConsole
 {
     internal class ProcessToAnalyze
     {
         internal string Name { get; set; }
-        internal TimeSpan Duration { get; set; }
-        internal TimeSpan SamplingTime { get; set; }
+        internal TimeSpan DurationSeconds { get; set; }
+        internal TimeSpan SamplingTimeMilliSeconds { get; set; }
+        internal TimeSpan ElapsedTimeMilliSeconds { get; set; }
+        internal Timer timerAnalyzer;
         internal List<UsageSample> UsageSamples { get; set; }
+        internal Process Process { get; set; }
+
+        private static PerformanceCounter _cpuCounter;
+        private static PerformanceCounter _ramCounter;
+
+        internal ProcessToAnalyze() { }
+        internal ProcessToAnalyze(string name, TimeSpan durationSeconds, TimeSpan samplingTimeMilliSeconds, Process process)
+        {
+            Name = name;
+            DurationSeconds = durationSeconds;
+            SamplingTimeMilliSeconds = samplingTimeMilliSeconds;
+            Process = process;
+        }
+
+        internal void InitTimer()
+        {
+            timerAnalyzer = new Timer(DurationSeconds.TotalSeconds);
+            timerAnalyzer.Interval = SamplingTimeMilliSeconds.TotalMilliseconds;
+            timerAnalyzer.Elapsed += OnTimedSampling;
+        }
+
+        internal void OnTimedSampling(object source, ElapsedEventArgs e)
+        {
+            ElapsedTimeMilliSeconds += SamplingTimeMilliSeconds;
+            if (ElapsedTimeMilliSeconds < DurationSeconds )
+            {
+                _cpuCounter = new PerformanceCounter("Process", "% Processor Time", Process.ProcessName, true);
+                _cpuCounter.NextValue();
+                _ramCounter = new PerformanceCounter("Process", "% Memory Usage", Process.ProcessName, true);
+                _ramCounter.NextValue();
+                UsageSamples.Add(new UsageSample());
+            }
+            else
+            {
+                
+            }
+        }
+
+
 
         internal static ProcessToAnalyze AnalyzeInput(string command)
         {
             ProcessToAnalyze processToAnalyze = new ProcessToAnalyze();
-            Regex reg = new Regex(@"");
-            var matches = reg.Match(command);
+            TimeSpan duration;
+            TimeSpan samplingTime;
+            Regex reg = new Regex(@"(\w+)");
+            var matches = reg.Matches(command);
 
-            if (matches.Groups[0].Success)
-            {
-
-            }
-
-            else if (matches.Groups[1].Success)
-            {
-
-            }
-
-            else if (matches.Groups[2].Success)
-            {
-
-            }
-
-            else
+            if (matches.Count != 3) //or number of parameters expected
             {
                 Console.WriteLine("Problem with the input, should be ProcessName DurationInSeconds SamplingInMilliSeconds ");
                 return null;
             }
 
+            processToAnalyze.Name = matches[0].Value;
+            
+            if (TimeSpan.TryParse(matches[1].Value, out duration))
+            {
+                processToAnalyze.DurationSeconds = duration;
+            }
+
+            if (TimeSpan.TryParse(matches[2].Value, out samplingTime))
+            {
+                processToAnalyze.SamplingTimeMilliSeconds = samplingTime;
+            }
+
             return processToAnalyze;
         }
     }
-
-
 }
