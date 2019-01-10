@@ -5,5 +5,5 @@ install:
 - dotnet restore
 
 script:
-- dotnet build
+- dotnet dotnet: 2.1.300
 - dotnet test ./packages/xunit.runners.*/tools/xunit.console.clr4.exe ./ProcessAnalyzerConsole/bin/Debug/ProcessAnalyzerConsole.dll
