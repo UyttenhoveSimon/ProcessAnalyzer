@@ -44,7 +44,7 @@ namespace ProcessAnalyzerConsole.App
             if (ElapsedTimeMilliSeconds < DurationSeconds)
             {
                 _cpuCounter = new PerformanceCounter("Process", "% Processor Time", Process.ProcessName, true);
-                _ramCounter = new PerformanceCounter("Process", "% Memory Usage", Process.ProcessName, true);
+                _ramCounter = new PerformanceCounter("Process", "Working Set", Process.ProcessName, true);
                 UsageSamples.Add(new UsageSample(_cpuCounter.NextValue(), _ramCounter.NextValue(), Process.HandleCount));
             }
             else
@@ -57,8 +57,6 @@ namespace ProcessAnalyzerConsole.App
         internal static ProcessToAnalyze AnalyzeInput(string command)
         {
             ProcessToAnalyze processToAnalyze = new ProcessToAnalyze();
-            TimeSpan duration;
-            TimeSpan samplingTime;
             Regex reg = new Regex(@"(\w+)");
             var matches = reg.Matches(command);
 
@@ -70,12 +68,12 @@ namespace ProcessAnalyzerConsole.App
 
             processToAnalyze.Name = matches[0].Value;
 
-            if (TimeSpan.TryParse(matches[1].Value, out duration))
+            if (TimeSpan.TryParse(matches[1].Value, out TimeSpan duration))
             {
                 processToAnalyze.DurationSeconds = duration;
             }
 
-            if (TimeSpan.TryParse(matches[2].Value, out samplingTime))
+            if (TimeSpan.TryParse(matches[2].Value, out TimeSpan samplingTime))
             {
                 processToAnalyze.SamplingTimeMilliSeconds = samplingTime;
             }

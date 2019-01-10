@@ -9,14 +9,14 @@ namespace ProcessAnalyzerConsole.App
     {
         private static void Main(string[] args)
         {
-            Console.WriteLine("ProcessAnalyzer");
+            Console.WriteLine("ProcessAnalyzer, here is the processes list:");
 
             string command;
 
             var processes = Process.GetProcesses();
             foreach (var process in processes)
             {
-                Console.WriteLine(process);
+                Console.WriteLine(process.ProcessName);
             }
 
             Console.WriteLine("Input the ProcessName DurationInSeconds SamplingInMilliSeconds ");
