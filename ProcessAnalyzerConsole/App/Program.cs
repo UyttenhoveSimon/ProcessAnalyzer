@@ -5,7 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Timers;
 
-namespace ProcessAnalyzerConsole
+namespace ProcessAnalyzerConsole.App
 {
     internal class Program
     {

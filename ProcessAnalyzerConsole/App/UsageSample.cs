@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics;
 
-namespace ProcessAnalyzerConsole
+namespace ProcessAnalyzerConsole.App
 {
     internal class UsageSample
     {

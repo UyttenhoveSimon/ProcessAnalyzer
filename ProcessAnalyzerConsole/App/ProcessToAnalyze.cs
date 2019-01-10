@@ -4,7 +4,7 @@ using System.Diagnostics;
 using System.Text.RegularExpressions;
 using System.Timers;
 
-namespace ProcessAnalyzerConsole
+namespace ProcessAnalyzerConsole.App
 {
     internal class ProcessToAnalyze
     {
@@ -19,7 +19,10 @@ namespace ProcessAnalyzerConsole
         private static PerformanceCounter _cpuCounter;
         private static PerformanceCounter _ramCounter;
 
-        internal ProcessToAnalyze() { }
+        internal ProcessToAnalyze()
+        {
+        }
+
         internal ProcessToAnalyze(string name, TimeSpan durationSeconds, TimeSpan samplingTimeMilliSeconds, Process process)
         {
             Name = name;
@@ -38,21 +41,18 @@ namespace ProcessAnalyzerConsole
         internal void OnTimedSampling(object source, ElapsedEventArgs e)
         {
             ElapsedTimeMilliSeconds += SamplingTimeMilliSeconds;
-            if (ElapsedTimeMilliSeconds < DurationSeconds )
+            if (ElapsedTimeMilliSeconds < DurationSeconds)
             {
                 _cpuCounter = new PerformanceCounter("Process", "% Processor Time", Process.ProcessName, true);
-                _cpuCounter.NextValue();
                 _ramCounter = new PerformanceCounter("Process", "% Memory Usage", Process.ProcessName, true);
-                _ramCounter.NextValue();
-                UsageSamples.Add(new UsageSample());
+                UsageSamples.Add(new UsageSample(_cpuCounter.NextValue(), _ramCounter.NextValue(), Process.HandleCount));
             }
             else
             {
-                
+                timerAnalyzer.Stop();
+                Console.WriteLine("Timer of the process " + Name + " has finished");
             }
         }
-
-
 
         internal static ProcessToAnalyze AnalyzeInput(string command)
         {
@@ -69,7 +69,7 @@ namespace ProcessAnalyzerConsole
             }
 
             processToAnalyze.Name = matches[0].Value;
-            
+
             if (TimeSpan.TryParse(matches[1].Value, out duration))
             {
                 processToAnalyze.DurationSeconds = duration;
