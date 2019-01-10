@@ -1,6 +1,4 @@
-﻿using System.Diagnostics;
-
-namespace ProcessAnalyzerConsole.App
+﻿namespace ProcessAnalyzerConsole.App
 {
     internal class UsageSample
     {
@@ -8,7 +6,10 @@ namespace ProcessAnalyzerConsole.App
         internal float MemoryUsage { get; set; }
         internal int HandlesNumber { get; set; }
 
-        internal UsageSample() { }
+        internal UsageSample()
+        {
+        }
+
         internal UsageSample(float cpuUsage, float memoryUsage, int handlesNumber)
         {
             CPUUsage = cpuUsage;

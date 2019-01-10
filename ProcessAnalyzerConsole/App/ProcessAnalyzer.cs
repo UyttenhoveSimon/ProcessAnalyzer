@@ -1,9 +1,14 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace ProcessAnalyzerConsole.App
 {
     internal class ProcessAnalyzer : BaseAnalyzer
     {
+        internal ProcessAnalyzer(List<UsageSample> samples) : base(samples)
+        {
+        }
+
         internal string ResultsAverage()
         {
             string averages = string.Empty;

@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using ProcessAnalyzerConsole.App;
 using Xunit;
 
 namespace ProcessAnalyzerConsole.Tests
-{   
+{
     public class Test_AnalyzeInput
     {
         [Fact]
@@ -38,6 +36,5 @@ namespace ProcessAnalyzerConsole.Tests
             var process = ProcessToAnalyze.AnalyzeInput(input);
             Assert.Null(process);
         }
-
     }
 }

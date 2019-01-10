@@ -1,13 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ProcessAnalyzerConsole.App
 {
-    internal class LeakAnalyzer: BaseAnalyzer
+    internal class LeakAnalyzer : BaseAnalyzer
     {
+        internal LeakAnalyzer()
+        {
+        }
+
+        internal LeakAnalyzer(List<UsageSample> samples) : base(samples)
+        {
+        }
+
         internal bool CheckLeak(int percentageLeakLimit)
         {
             if (_samples.Count < 1)
@@ -21,7 +26,7 @@ namespace ProcessAnalyzerConsole.App
             {
                 return true;
             }
-           
+
             return false;
         }
     }

@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
 using System.Threading.Tasks;
-using System.Timers;
 
 namespace ProcessAnalyzerConsole.App
 {
@@ -33,8 +31,8 @@ namespace ProcessAnalyzerConsole.App
                     processes = Process.GetProcessesByName(pTA.Name);
 
                     if (processes != null &&
-                        pTA.DurationSeconds.TotalSeconds !=0 &&
-                        pTA.SamplingTimeMilliSeconds.TotalMilliseconds !=0 )
+                        pTA.DurationSeconds.TotalSeconds != 0 &&
+                        pTA.SamplingTimeMilliSeconds.TotalMilliseconds != 0)
                     {
                         List<ProcessToAnalyze> pTAs = new List<ProcessToAnalyze>();
                         foreach (var process in processes)
