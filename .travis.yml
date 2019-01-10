@@ -2,8 +2,7 @@
 solution: "ProcessAnalyzerConsole.sln"
 
 install:
-- dotnet restore
+- dotnet: 2.1.300
 
 script:
-- dotnet dotnet: 2.1.300
 - dotnet test ./packages/xunit.runners.*/tools/xunit.console.clr4.exe ./ProcessAnalyzerConsole/bin/Debug/ProcessAnalyzerConsole.dll
