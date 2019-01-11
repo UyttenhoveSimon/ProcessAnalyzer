@@ -5,4 +5,4 @@ dotnet: 2.1.300
 
 script:
 - dotnet restore
-- dotnet test ./packages/xunit.runners.*/tools/xunit.console.clr4.exe ./ProcessAnalyzerConsole/bin/Debug/ProcessAnalyzerConsole.dll
+- dotnet xbuild ./packages/xunit.runners.*/tools/xunit.console.clr4.exe ./ProcessAnalyzerConsole/bin/Debug/ProcessAnalyzerConsole.dll
