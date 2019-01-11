@@ -8,4 +8,4 @@ Once input, the process(es) are analyzed accordingly using a timer elapsed event
 
 Once the duration time is over, the various analyzers can perform operation on the collected samples. 
 
-The automated test suite uses Travis to perform continuous integration: https://travis-ci.com/UyttenhoveSimon/ProcessAnalyzer.svg?branch=master
+The automated test suite uses Travis to perform continuous integration: [![Build Status](https://travis-ci.com/UyttenhoveSimon/ProcessAnalyzer.svg?branch=master)](https://travis-ci.com/UyttenhoveSimon/ProcessAnalyzer)
