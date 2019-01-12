@@ -14,8 +14,7 @@ before_build:
   # Display minimal restore text
   - cmd: dotnet restore ./ProcessAnalyzerConsole/ProcessAnalyzerConsole.csproj --verbosity m
 build_script:
-  # output will be in ./src/bin/debug/netcoreapp2.1/publish
-  - cmd: dotnet publish ProcessAnalyzer/ProcessAnalyzerConsole.csproj
+  - cmd: dotnet publish ./ProcessAnalyzer/ProcessAnalyzerConsole.csproj
 after_build:
   # For once the build has completed
 artifacts:
