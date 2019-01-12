@@ -14,7 +14,7 @@ before_build:
   # Display minimal restore text
   - cmd: dotnet restore ./ProcessAnalyzerConsole/ProcessAnalyzerConsole.csproj --verbosity m
 build_script:
-  - cmd: dotnet build ./ProcessAnalyzer/ProcessAnalyzerConsole.csproj
+  - cmd: dotnet build
 after_build:
   # For once the build has completed
 #artifacts:
