@@ -14,14 +14,14 @@ before_build:
   # Display minimal restore text
   - cmd: dotnet restore ./ProcessAnalyzerConsole/ProcessAnalyzerConsole.csproj --verbosity m
 build_script:
-  - cmd: dotnet publish ./ProcessAnalyzer/ProcessAnalyzerConsole.csproj
+  - cmd: dotnet build ./ProcessAnalyzer/ProcessAnalyzerConsole.csproj
 after_build:
   # For once the build has completed
-artifacts:
- - path: '\src\bin\Debug\netcoreapp2.1\publish'
-   name: WebSite
-   type: WebDeployPackage
-clone_depth: 1
+#artifacts:
+# - path: '\src\bin\Debug\netcoreapp2.1\publish'
+#   name: WebSite
+#   type: WebDeployPackage
+#clone_depth: 1
 test_script:
   # restore packages for our unit tests
   - cmd: dotnet restore ./ProcessAnalyzerConsole/ProcessAnalyzerConsole.csproj --verbosity m
