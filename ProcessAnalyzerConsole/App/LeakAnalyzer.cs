@@ -15,7 +15,7 @@ namespace ProcessAnalyzerConsole.App
 
         internal bool CheckLeak(int percentageLeakLimit)
         {
-            if (_samples.Count < 1)
+            if (_samples == null || _samples.Count < 1)
             {
                 return false;
             }
